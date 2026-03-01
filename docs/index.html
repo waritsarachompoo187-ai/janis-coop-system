@@ -4,25 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Cache Busting Hack -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Coop-Match AI | Engineering Edition v5</title>
+    <title>Coop-Match AI | Engineering Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #9b1c1c;
-            /* Deep Engineering Red */
-            --primary-light: #f87171;
+            --primary: #b91c1c;
+            /* Maroon / Engineering Red */
+            --primary-light: #ef4444;
             --secondary: #10b981;
-            --accent: #450a0a;
-            --dark: #1a0a0a;
+            --accent: #7f1d1d;
+            --dark: #1e1b1b;
             --darker: #0c0a0a;
             --light: #fef2f2;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --maroon-glow: rgba(153, 27, 27, 0.5);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --maroon-glow: rgba(185, 28, 28, 0.3);
         }
 
         * {
@@ -40,7 +36,7 @@
             overflow-x: hidden;
         }
 
-        /* --- High-Visibility Engineering Gears --- */
+        /* --- Engineering Gears Background --- */
         .bg-gears {
             position: fixed;
             top: 0;
@@ -49,37 +45,35 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            background: radial-gradient(circle at center, #2a0a0a 0%, #0c0a0a 100%);
+            background: radial-gradient(circle at center, #1a0a0a 0%, #0c0a0a 100%);
         }
 
         .gear {
             position: absolute;
-            opacity: 0.12;
-            /* Increased opacity for visibility */
-            animation: spin 30s linear infinite;
+            opacity: 0.05;
+            animation: spin 20s linear infinite;
             fill: var(--primary);
-            filter: drop-shadow(0 0 20px var(--maroon-glow));
         }
 
         .gear-1 {
             top: -10%;
             right: -5%;
-            width: 500px;
-            animation-duration: 45s;
+            width: 400px;
+            animation-duration: 40s;
         }
 
         .gear-2 {
-            bottom: -10%;
+            bottom: -5%;
             left: -5%;
-            width: 400px;
+            width: 300px;
             animation-direction: reverse;
         }
 
         .gear-3 {
-            top: 30%;
-            left: 5%;
-            width: 200px;
-            opacity: 0.08;
+            top: 40%;
+            left: 10%;
+            width: 150px;
+            opacity: 0.03;
         }
 
         @keyframes spin {
@@ -100,10 +94,9 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 1100px;
-            background: rgba(42, 10, 10, 0.85);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--primary);
-            /* Stronger border */
+            background: rgba(12, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             padding: 0.8rem 2rem;
             border-radius: 100px;
             display: flex;
@@ -122,32 +115,31 @@
         }
 
         .logo span {
-            color: var(--primary-light);
+            color: var(--primary);
         }
 
         .logo svg {
-            width: 28px;
-            fill: var(--primary-light);
-            animation: spin 4s linear infinite;
+            width: 24px;
+            fill: var(--primary);
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             margin-left: 2rem;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
             transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-light);
+            color: var(--primary);
         }
 
         /* --- SPA Sections --- */
         section {
             min-height: 100vh;
-            padding: 160px 1.5rem 80px;
+            padding: 140px 1.5rem 80px;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -161,166 +153,428 @@
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 8vw, 5.5rem);
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, #f87171, #991b1b);
+            background: linear-gradient(90deg, #ef4444, #7f1d1d);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.4rem;
-            color: #d1d5db;
-            max-width: 850px;
-            margin-bottom: 3.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            max-width: 800px;
+            margin-bottom: 3rem;
         }
 
         .btn {
-            padding: 1.2rem 3rem;
+            padding: 1rem 2.5rem;
             border-radius: 100px;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-block;
             cursor: pointer;
             border: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
             box-shadow: 0 10px 40px var(--maroon-glow);
-            border: 1px solid var(--primary-light);
         }
 
         .btn-primary:hover {
-            transform: scale(1.08) translateY(-8px);
-            box-shadow: 0 20px 60px var(--maroon-glow);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 50px var(--maroon-glow);
             background: var(--primary-light);
         }
 
-        /* --- Interactive Panels --- */
+        /* --- Interactive Components --- */
         .glass-panel {
-            background: rgba(42, 10, 10, 0.4);
-            border: 2px solid var(--glass-border);
-            backdrop-filter: blur(40px);
-            border-radius: 40px;
-            padding: 4rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            padding: 3rem;
             width: 100%;
             margin-top: 2rem;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
+
+        /* --- Document Wizard --- */
+        .wizard-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            gap: 0;
+        }
+
+        .wstep {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .wstep-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #71717a;
+            background: #1a0808;
+            transition: 0.4s;
+        }
+
+        .wstep-label {
+            font-size: 0.72rem;
+            color: #71717a;
+            text-align: center;
+            transition: 0.4s;
+            white-space: nowrap;
+        }
+
+        .wstep.active .wstep-circle {
+            border-color: var(--primary);
+            color: var(--primary-light);
+            background: rgba(185, 28, 28, 0.15);
+            box-shadow: 0 0 12px var(--maroon-glow);
+        }
+
+        .wstep.active .wstep-label {
+            color: var(--primary-light);
+        }
+
+        .wstep.done .wstep-circle {
+            border-color: var(--secondary);
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--secondary);
+        }
+
+        .wstep.done .wstep-label {
+            color: var(--secondary);
+        }
+
+        .wstep-line {
+            flex: 1;
+            height: 2px;
+            background: var(--glass-border);
+            min-width: 60px;
+            margin: 0 8px;
+            margin-bottom: 22px;
+            transition: 0.4s;
+        }
+
+        .wstep-line.done {
+            background: var(--secondary);
+        }
+
+        .wizard-panel {
+            display: none;
+            animation: slideUp 0.4s;
+        }
+
+        .wizard-panel.active {
+            display: block;
+        }
+
+        .doc-preview {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .doc-icon {
+            font-size: 2.5rem;
+        }
+
+        .doc-info h4 {
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .doc-info p {
+            font-size: 0.8rem;
+            color: #a1a1aa;
+        }
+
+        /* --- Status Timeline --- */
+        .timeline {
+            margin-top: 2rem;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+            transition: 0.5s;
+        }
+
+        .tl-item.done {
+            opacity: 1;
+        }
+
+        .tl-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--glass-border);
+            margin-top: 4px;
+            flex-shrink: 0;
+            transition: 0.5s;
+        }
+
+        .tl-item.done .tl-dot {
+            background: var(--secondary);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+        }
+
+        .tl-item.active .tl-dot {
+            background: var(--primary-light);
+            animation: pulse-dot 1s infinite;
+        }
+
+        .tl-item.active {
+            opacity: 1;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                box-shadow: 0 0 4px var(--maroon-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 16px var(--maroon-glow);
+            }
+        }
+
+        .tl-content h4 {
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .tl-content p {
+            font-size: 0.8rem;
+            color: #71717a;
+        }
+
+        /* --- Confetti --- */
+        .confetti-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+            display: none;
+        }
+
+        .cfetti {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: cf-fall linear forwards;
+        }
+
+        @keyframes cf-fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
 
         .section-tag {
             color: var(--primary-light);
             font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: block;
-            border-left: 4px solid var(--primary);
-            padding-left: 10px;
         }
 
         /* --- AI Matcher UI --- */
         .matcher-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: start;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 1rem;
-            color: #e5e7eb;
-            font-weight: 700;
-            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #a1a1aa;
+            font-weight: 600;
         }
 
         textarea,
         input,
         select {
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--glass-border);
-            padding: 1.4rem;
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem;
+            border-radius: 16px;
             color: white;
             font-family: inherit;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: 0.3s;
         }
 
         textarea:focus,
         input:focus {
-            border-color: var(--primary-light);
+            border-color: var(--primary);
             outline: none;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .ai-result-panel {
-            min-height: 500px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 30px;
-            padding: 3rem;
-            border: 2px dashed var(--primary);
+            min-height: 450px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px dashed var(--glass-border);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden;
             position: relative;
         }
 
-        .match-score {
-            font-size: 6rem;
-            font-weight: 800;
+        .status-steps {
+            text-align: left;
+            width: 100%;
+            max-width: 300px;
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: #71717a;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .step.active {
+            opacity: 1;
             color: var(--primary-light);
-            text-shadow: 0 0 50px var(--maroon-glow);
-            margin-bottom: 1rem;
+        }
+
+        .step.done {
+            opacity: 1;
+            color: var(--secondary);
         }
 
         .step.done::before {
             content: '⚙️';
-            margin-right: 8px;
+            margin-right: 5px;
             animation: spin 2s linear infinite;
-            color: var(--primary-light);
         }
 
-        .step.active {
+        .match-score {
+            font-size: 5rem;
+            font-weight: 800;
             color: var(--primary-light);
-            font-weight: 700;
-            transform: scale(1.1);
+            text-shadow: 0 0 30px var(--maroon-glow);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-list {
+            width: 100%;
+            text-align: left;
+            display: none;
+            margin-top: 2rem;
         }
 
         .company-item {
-            background: rgba(153, 27, 27, 0.1);
-            padding: 1.8rem;
-            border-radius: 20px;
-            margin-bottom: 1.2rem;
-            border-left: 6px solid var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: slideUp 0.5s forwards;
+        }
+
+        /* --- Partner Grid --- */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .partner-card:hover {
+            border-color: var(--primary);
+            background: rgba(185, 28, 28, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .role-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(185, 28, 28, 0.1);
+            color: var(--primary-light);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         /* --- Animations --- */
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
 
             to {
@@ -329,19 +583,26 @@
             }
         }
 
-        /* --- Footer --- */
+        .loading-pulse {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
         footer {
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
-            background: #0c0a0a;
-            border-top: 2px solid var(--primary);
-            color: #9ca3af;
+            border-top: 1px solid var(--glass-border);
+            color: #71717a;
         }
 
         footer span {
-            color: var(--primary-light);
-            font-weight: 800;
-            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 600;
         }
 
         @media (max-width: 900px) {
@@ -350,7 +611,11 @@
             }
 
             section {
-                padding-top: 120px;
+                padding-top: 100px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
             }
         }
     </style>
@@ -358,12 +623,16 @@
 
 <body>
     <div class="bg-gears">
-        <!-- Enlarged SVG Gear Icons -->
+        <!-- SVG Gear Icon (Reuse) -->
         <svg class="gear gear-1" viewBox="0 0 24 24">
             <path
                 d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.04 4.95 18.95L7.44 17.95C7.96 18.34 8.53 18.66 9.14 18.92L9.52 21.58C9.56 21.82 9.76 22 10 22H14C14.24 22 14.44 21.82 14.48 21.58L14.86 18.92C15.47 18.66 16.04 18.34 16.56 17.95L19.05 18.95C19.27 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" />
         </svg>
         <svg class="gear gear-2" viewBox="0 0 24 24">
+            <path
+                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 11.67 4.53 11.34 4.57 11.03L2.46 9.37C2.27 9.22 2.21 8.95 2.34 8.73L4.34 5.27C4.46 5.05 4.73 4.96 4.95 5.05L7.44 6.05C7.96 5.66 8.53 5.34 9.14 5.08L9.52 2.42C9.56 2.18 9.76 2 10 2H14C14.24 2 14.44 2.18 14.48 2.42L14.86 5.08C15.47 5.34 16.04 5.66 16.56 6.05L19.05 5.05C19.27 4.96 19.54 5.05 19.66 5.27L21.66 8.73C21.78 8.95 21.73 9.22 21.54 9.37L19.43 11.03C19.47 11.34 19.5 11.67 19.5 12C19.5 12.33 19.47 12.65 19.43 12.97Z" />
+        </svg>
+        <svg class="gear gear-3" viewBox="0 0 24 24">
             <path
                 d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.04 4.95 18.95L7.44 17.95C7.96 18.34 8.53 18.66 9.14 18.92L9.52 21.58C9.56 21.82 9.76 22 10 22H14C14.24 22 14.44 21.82 14.48 21.58L14.86 18.92C15.47 18.66 16.04 18.34 16.56 17.95L19.05 18.95C19.27 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" />
         </svg>
@@ -387,12 +656,12 @@
 
     <!-- HERO -->
     <section id="hero" class="hero">
-        <span class="section-tag">Computer Engineering Exclusive</span>
+        <span class="section-tag">Computer Engineering Co-op</span>
         <h1>Drive Your Future with <span>Engineered</span> Match.</h1>
         <p>ขับเคลื่อนก้าวแรกสู่วิชาชีพวิศวกรด้วย AI อัจฉริยะ
-            ออกแบบมาเพื่อค้นหาสถานประกอบการที่ตรงกับทักษะทางวิศวกรรมเฉพาะตัวคุณแบบ 1:1</p>
+            ออกแบบมาเพื่อค้นหาสถานประกอบการที่ตรงกับทักษะวิศวกรรมเฉพาะตัวคุณ</p>
         <div>
-            <a href="#matcher" class="btn btn-primary">Start Analysis Engine</a>
+            <a href="#matcher" class="btn btn-primary">Analyze My Engineering Skills</a>
         </div>
     </section>
 
@@ -400,36 +669,36 @@
     <section id="matcher">
         <div class="glass-panel">
             <span class="section-tag">Vector Match Matrix</span>
-            <div style="margin-bottom: 3rem; text-align: left;">
-                <h2 style="font-size: 2.5rem;">CPE <span>Skill Scanner</span></h2>
-                <p style="color: #9ca3af; font-size: 1.2rem;">วิเคราะห์ทักษะวิศวกรรมในระดับ Deep Logic
-                    เพื่อแมตช์บริษัทชั้นนำ</p>
+            <div style="margin-bottom: 2rem;">
+                <h2 style="font-size: 2.5rem;">CPE <span>Skill Analysis</span></h2>
+                <p style="color: #a1a1aa;">วิเคราะห์ทักษะด้านฮาร์ดแวร์ ซอฟต์แวร์ และเน็ตเวิร์ก เพื่อแมตช์บริษัทที่ใช่
+                </p>
             </div>
 
             <div class="matcher-container">
                 <div class="input-panel">
                     <div class="input-group">
-                        <label>Engineering Skills & Logic Portfolio</label>
-                        <textarea id="skills-input" rows="6"
-                            placeholder="เช่น IoT Architecture, Embedded C, Cloud Native, React/Node, AI/ML Infrastructure..."></textarea>
+                        <label>Engineering Skills (e.g., IoT, Embedded, Cloud, AI)</label>
+                        <textarea id="skills-input" rows="5"
+                            placeholder="เช่น IoT, Microcontroller, FPGA, React, Python, Cloud Infrastructure..."></textarea>
                     </div>
                     <div class="input-group">
-                        <label>Discipline Focus</label>
+                        <label>Engineering Discipline</label>
                         <select>
-                            <option>Computer Engineering (Hardware/Software)</option>
-                            <option>System Architecture & Cloud</option>
-                            <option>AI & Data Engineering</option>
-                            <option>Network & Cybersecurity</option>
+                            <option>Computer Engineering (Core)</option>
+                            <option>Network Engineering</option>
+                            <option>Cloud Architecture</option>
+                            <option>Embedded Systems</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary" onclick="runMatch()"
-                        style="width: 100%; border-radius: 20px;">DEPLOY ANALYSIS ENGINE</button>
+                    <button class="btn btn-primary" onclick="runMatch()" style="width: 100%;">START ANALYSIS
+                        ENGINE</button>
                 </div>
 
                 <div class="ai-result-panel" id="result-panel">
                     <div id="default-state">
-                        <div style="font-size: 5rem; margin-bottom: 2rem; animation: spin 10s linear infinite;">⚙️</div>
-                        <p style="color: #9ca3af; font-weight: 600;">System Ready. Waiting for Core Data...</p>
+                        <div style="font-size: 4rem; opacity: 0.2; margin-bottom: 1rem;">⚙️</div>
+                        <p style="color: #71717a;">Engine standby. Input data requested.</p>
                     </div>
 
                     <div class="status-steps" id="ai-steps">
@@ -443,22 +712,29 @@
 
                     <div id="match-data" style="display: none; width: 100%;">
                         <div class="match-score" id="score-num">98%</div>
-                        <p style="font-weight: 800; color: var(--primary-light); letter-spacing: 3px;">ENGINEERED MATCH
+                        <p style="font-weight: 800; color: var(--primary-light); letter-spacing: 2px;">ENGINEERING MATCH
                             FOUND!</p>
 
                         <div class="company-list">
                             <div class="company-item">
                                 <div>
-                                    <h4 style="color: #fff; font-size: 1.2rem;">Agoda (Bangkok Office)</h4>
-                                    <p style="font-size: 1rem; color: var(--primary-light);">High Engineering Affinity
-                                        Found</p>
+                                    <h4 style="color: #fff;">Agoda (Bangkok Office)</h4>
+                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Insight: High Scalability
+                                        affinity</p>
                                 </div>
-                                <span
-                                    style="font-weight: 800; color: var(--primary-light); font-size: 1.2rem;">98.4%</span>
+                                <span style="font-weight: 800; color: var(--primary-light);">98.4%</span>
+                            </div>
+                            <div class="company-item" style="animation-delay: 0.2s;">
+                                <div>
+                                    <h4 style="color: #fff;">KBTG</h4>
+                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Insight: Strong Data
+                                        Engineering focus</p>
+                                </div>
+                                <span style="font-weight: 800; color: var(--primary-light);">92.1%</span>
                             </div>
                         </div>
                         <button class="btn"
-                            style="background: rgba(255,255,255,0.05); color: #fff; border: 2px solid var(--primary); margin-top: 2rem; padding: 0.8rem 2rem;"
+                            style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--glass-border); margin-top: 1rem; padding: 0.5rem 1.5rem;"
                             onclick="resetMatch()">Run Another Scan</button>
                     </div>
                 </div>
@@ -466,10 +742,208 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- PARTNER ESTABLISHMENTS -->
+    <section id="partners">
+        <div class="glass-panel">
+            <span class="section-tag">Engineering Alliances</span>
+            <div style="margin-bottom: 3rem; text-align: center;">
+                <h2 style="font-size: 2.5rem;">CPE <span>Partner Network</span></h2>
+                <p style="color: #a1a1aa;">พันธมิตรสถานประกอบการชั้นนำ สำหรับนิสิตวิศวกรรมคอมพิวเตอร์</p>
+            </div>
+
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <h4>True Digital Group</h4>
+                    <p>ผู้นำด้าน IoT และ Big Data Ecosystem ในภูมิภาคเอเชียตะวันออกเฉียงใต้</p>
+                    <div class="role-tags">
+                        <span class="role-tag">IoT Systems</span>
+                        <span class="role-tag">Data Analytic</span>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <h4>SCB TechX</h4>
+                    <p>บริษัทเทคโนโลยีครบวงจรในกลุ่ม SCB X มุ่งเน้นการปฏิวัติโลกการเงินด้วยเทคโนโลยี</p>
+                    <div class="role-tags">
+                        <span class="role-tag">Software Eng</span>
+                        <span class="role-tag">Platform Eng</span>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <h4>KBTG</h4>
+                    <p>ขุมพลังทางเทคโนโลยีของกสิกรไทย เชี่ยวชาญด้าน Blockchain และ AI ขั้นสูง</p>
+                    <div class="role-tags">
+                        <span class="role-tag">AI / ML</span>
+                        <span class="role-tag">Cloud Architecture</span>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <h4>Bitkub</h4>
+                    <p>ผู้นำด้านสินทรัพย์ดิจิทัลและเทคโนโลยี Blockchain ในประเทศไทย</p>
+                    <div class="role-tags">
+                        <span class="role-tag">Smart Contract</span>
+                        <span class="role-tag">Cybersecurity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFETTI OVERLAY -->
+    <div class="confetti-overlay" id="confetti-overlay"></div>
+
+    <!-- DOCUMENT SUBMISSION -->
+    <section id="submission">
+        <div class="glass-panel" style="max-width: 860px;">
+            <span class="section-tag">Smart Doc Portal</span>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2.5rem;">Engineering <span>Docs Submission</span></h2>
+                <p style="color: #a1a1aa;">ระบบยื่นเอกสารอัจฉริยะ 3 ขั้นตอน — ที่ไม่เหมือนใคร</p>
+            </div>
+
+            <!-- STEP INDICATOR -->
+            <div class="wizard-steps">
+                <div class="wstep active" id="wstep-1">
+                    <div class="wstep-circle">1</div>
+                    <div class="wstep-label">ข้อมูลนิสิต</div>
+                </div>
+                <div class="wstep-line" id="wline-1"></div>
+                <div class="wstep" id="wstep-2">
+                    <div class="wstep-circle">2</div>
+                    <div class="wstep-label">เลือกเอกสาร</div>
+                </div>
+                <div class="wstep-line" id="wline-2"></div>
+                <div class="wstep" id="wstep-3">
+                    <div class="wstep-circle">3</div>
+                    <div class="wstep-label">ยืนยันส่ง</div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Student Info -->
+            <div class="wizard-panel active" id="wpanel-1">
+                <div class="input-group">
+                    <label>รหัสนิสิต (Student ID)</label>
+                    <input type="text" id="student-id" placeholder="64XXXXXX-X" maxlength="10">
+                    <p id="id-error"
+                        style="color: var(--primary-light); font-size: 0.8rem; margin-top: 0.5rem; display:none;">⚠️
+                        รหัสนิสิตต้องเป็นตัวเลข 10 หลัก</p>
+                </div>
+                <div class="input-group">
+                    <label>ชื่อ - นามสกุล</label>
+                    <input type="text" id="student-name" placeholder="ชื่อ นามสกุล">
+                </div>
+                <button class="btn btn-primary" style="width:100%;" onclick="wizardNext(1)">ถัดไป → ขั้นตอนที่
+                    2</button>
+            </div>
+
+            <!-- STEP 2: Document Selection -->
+            <div class="wizard-panel" id="wpanel-2">
+                <div class="input-group">
+                    <label>ประเภทเอกสาร</label>
+                    <select id="doc-type">
+                        <option value="ท.01">ท.01 — คำร้องขอเข้าฝึกสหกิจ</option>
+                        <option value="ท.02">ท.02 — หนังสือยินยอมผู้ปกครอง</option>
+                        <option value="ท.03">ท.03 — Technical Portfolio</option>
+                        <option value="ท.04">ท.04 — บันทึกสุขภาพนิสิต</option>
+                    </select>
+                </div>
+                <div id="upload-zone" onclick="simulateUpload()"
+                    style="border: 2px dashed var(--glass-border); padding: 2.5rem; text-align:center; border-radius: 20px; cursor:pointer; transition:0.3s;">
+                    <div style="font-size:2.5rem; margin-bottom:1rem;">📁</div>
+                    <p id="upload-status" style="color:#a1a1aa;">คลิกเพื่อแนบไฟล์ PDF (รองรับไฟล์ไม่เกิน 10 MB)</p>
+                </div>
+                <div id="doc-preview" style="display:none;" class="doc-preview">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-info">
+                        <h4 id="preview-filename">engineer_portfolio.pdf</h4>
+                        <p id="preview-meta">PDF • 2.4 MB • Attached ✓</p>
+                    </div>
+                </div>
+                <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+                    <button class="btn"
+                        style="flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); color:#fff;"
+                        onclick="wizardBack(2)">← กลับ</button>
+                    <button class="btn btn-primary" style="flex:2;" onclick="wizardNext(2)">ถัดไป → ขั้นตอนที่
+                        3</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Confirm & Status -->
+            <div class="wizard-panel" id="wpanel-3">
+                <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:2rem; margin-bottom:1.5rem;">
+                    <h4 style="color:#a1a1aa; margin-bottom:1rem; font-size:0.8rem; letter-spacing:2px;">SUBMISSION
+                        SUMMARY</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <div>
+                            <p style="color:#71717a; font-size:0.8rem;">รหัสนิสิต</p>
+                            <p id="sum-id" style="color:#fff; font-weight:700;">—</p>
+                        </div>
+                        <div>
+                            <p style="color:#71717a; font-size:0.8rem;">ชื่อ-นามสกุล</p>
+                            <p id="sum-name" style="color:#fff; font-weight:700;">—</p>
+                        </div>
+                        <div>
+                            <p style="color:#71717a; font-size:0.8rem;">ประเภทเอกสาร</p>
+                            <p id="sum-doc" style="color:#fff; font-weight:700;">—</p>
+                        </div>
+                        <div>
+                            <p style="color:#71717a; font-size:0.8rem;">ไฟล์แนบ</p>
+                            <p style="color:var(--secondary); font-weight:700;">✓ Attached</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden timeline -->
+                <div id="status-timeline" style="display:none;">
+                    <h4 style="color:#a1a1aa; font-size:0.8rem; letter-spacing:2px; margin-bottom:1rem;">PROCESSING
+                        STATUS</h4>
+                    <div class="timeline">
+                        <div class="tl-item" id="tl-1">
+                            <div class="tl-dot"></div>
+                            <div class="tl-content">
+                                <h4>🔒 Encrypting & Upload</h4>
+                                <p>ระบบกำลังเข้ารหัสและอัปโหลดเอกสารของคุณ</p>
+                            </div>
+                        </div>
+                        <div class="tl-item" id="tl-2">
+                            <div class="tl-dot"></div>
+                            <div class="tl-content">
+                                <h4>🤖 AI Document Verification</h4>
+                                <p>AI ตรวจสอบความครบถ้วนและถูกต้องของเอกสาร</p>
+                            </div>
+                        </div>
+                        <div class="tl-item" id="tl-3">
+                            <div class="tl-dot"></div>
+                            <div class="tl-content">
+                                <h4>📬 Routing to Department</h4>
+                                <p>ส่งเอกสารไปยังอาจารย์ผู้รับผิดชอบโดยอัตโนมัติ</p>
+                            </div>
+                        </div>
+                        <div class="tl-item" id="tl-4">
+                            <div class="tl-dot"></div>
+                            <div class="tl-content">
+                                <h4>✅ Submission Complete</h4>
+                                <p>เอกสารถึงสาขาวิชาเรียบร้อยแล้ว! รอผลอนุมัติภายใน 3 วันทำการ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="submit-btn-area">
+                    <div style="display:flex; gap:1rem;">
+                        <button class="btn"
+                            style="flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); color:#fff;"
+                            onclick="wizardBack(3)">← แก้ไข</button>
+                        <button class="btn btn-primary" id="final-submit-btn" style="flex:2;" onclick="submitFinal()">🚀
+                            ยืนยันส่งเอกสาร</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <p>Engineered with ❤️ by <span>Janis (Chomwarit)</span> | CPE Oracle Project</p>
-        <p>© 2026 Computer Engineering | Engineering Identity Edition v5</p>
+        <p>Built with ❤️ by <span>Janis (Chomwarit)</span> | Computer Engineering Oracle Janis</p>
+        <p>© 2026 CPE Cooperative Education | PRU University</p>
     </footer>
 
     <script>
@@ -504,6 +978,7 @@
                     updateStep(idx + 1);
                 }, 800 + Math.random() * 800);
             }
+
             updateStep(1);
         }
 
@@ -511,6 +986,8 @@
             document.getElementById('loader').style.display = 'none';
             document.getElementById('ai-steps').style.display = 'none';
             document.getElementById('match-data').style.display = 'block';
+            document.querySelector('.company-list').style.display = 'block';
+
             const score = 90 + Math.floor(Math.random() * 9);
             document.getElementById('score-num').innerText = score + "%";
         }
@@ -519,6 +996,93 @@
             document.getElementById('match-data').style.display = 'none';
             document.getElementById('default-state').style.display = 'block';
             document.getElementById('skills-input').value = '';
+        }
+
+        // ---- Document Wizard ----
+        let fileAttached = false;
+
+        function wizardNext(from) {
+            if (from === 1) {
+                const id = document.getElementById('student-id').value.trim();
+                const name = document.getElementById('student-name').value.trim();
+                if (!/^\d{8}-?\d?$/.test(id) && id.length < 8) {
+                    document.getElementById('id-error').style.display = 'block';
+                    return;
+                }
+                document.getElementById('id-error').style.display = 'none';
+                if (!name) { alert('กรุณากรอกชื่อ-นามสกุลค่ะ'); return; }
+                goStep(2);
+            } else if (from === 2) {
+                if (!fileAttached) { alert('กรุณาแนบไฟล์เอกสารก่อนค่ะ'); return; }
+                // populate summary
+                document.getElementById('sum-id').innerText = document.getElementById('student-id').value;
+                document.getElementById('sum-name').innerText = document.getElementById('student-name').value;
+                document.getElementById('sum-doc').innerText = document.getElementById('doc-type').value;
+                goStep(3);
+            }
+        }
+
+        function wizardBack(from) {
+            goStep(from - 1);
+        }
+
+        function goStep(n) {
+            [1, 2, 3].forEach(i => {
+                document.getElementById('wpanel-' + i).classList.remove('active');
+                const ws = document.getElementById('wstep-' + i);
+                ws.className = 'wstep' + (i < n ? ' done' : (i === n ? ' active' : ''));
+                if (i < 3) document.getElementById('wline-' + i).className = 'wstep-line' + (i < n ? ' done' : '');
+            });
+            document.getElementById('wpanel-' + n).classList.add('active');
+        }
+
+        function simulateUpload() {
+            fileAttached = true;
+            const docType = document.getElementById('doc-type') ? document.getElementById('doc-type').value : 'ท.01';
+            document.getElementById('upload-status').innerText = '✅ ' + docType + '_submission.pdf — Ready';
+            document.getElementById('upload-status').style.color = 'var(--secondary)';
+            document.getElementById('upload-zone').style.borderColor = 'var(--secondary)';
+            const preview = document.getElementById('doc-preview');
+            preview.style.display = 'flex';
+            document.getElementById('preview-filename').innerText = docType + '_submission.pdf';
+            document.getElementById('preview-meta').innerText = 'PDF • ' + (1 + Math.random() * 4).toFixed(1) + ' MB • Verified ✓';
+        }
+
+        function submitFinal() {
+            document.getElementById('submit-btn-area').style.display = 'none';
+            document.getElementById('status-timeline').style.display = 'block';
+            runTimeline();
+        }
+
+        function runTimeline() {
+            const items = ['tl-1', 'tl-2', 'tl-3', 'tl-4'];
+            let idx = 0;
+            function activateNext() {
+                if (idx > 0) document.getElementById(items[idx - 1]).classList.add('done');
+                if (idx < items.length) {
+                    document.getElementById(items[idx]).classList.add('active');
+                    idx++;
+                    setTimeout(activateNext, 1200 + Math.random() * 600);
+                } else {
+                    // All done
+                    setTimeout(() => launchConfetti(), 200);
+                }
+            }
+            activateNext();
+        }
+
+        function launchConfetti() {
+            const overlay = document.getElementById('confetti-overlay');
+            overlay.style.display = 'block';
+            overlay.innerHTML = '';
+            const colors = ['#b91c1c', '#ef4444', '#10b981', '#fbbf24', '#f9a8d4', '#a78bfa'];
+            for (let i = 0; i < 80; i++) {
+                const c = document.createElement('div');
+                c.className = 'cfetti';
+                c.style.cssText = `left:${Math.random() * 100}vw; background:${colors[i % colors.length]}; width:${6 + Math.random() * 10}px; height:${6 + Math.random() * 10}px; animation-duration:${2 + Math.random() * 2}s; animation-delay:${Math.random() * 0.8}s;`;
+                overlay.appendChild(c);
+            }
+            setTimeout(() => overlay.style.display = 'none', 4000);
         }
     </script>
 </body>
