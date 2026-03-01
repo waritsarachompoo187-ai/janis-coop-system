@@ -4,19 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coop-Match AI | Interactive Co-op System</title>
+    <title>Coop-Match AI | Engineering Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-light: #818cf8;
+            --primary: #b91c1c;
+            /* Maroon / Engineering Red */
+            --primary-light: #ef4444;
             --secondary: #10b981;
-            --accent: #f43f5e;
-            --dark: #0f172a;
-            --darker: #020617;
-            --light: #f8fafc;
+            --accent: #7f1d1d;
+            --dark: #1e1b1b;
+            --darker: #0c0a0a;
+            --light: #fef2f2;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
+            --maroon-glow: rgba(185, 28, 28, 0.3);
         }
 
         * {
@@ -34,17 +36,54 @@
             overflow-x: hidden;
         }
 
-        /* --- Background Animation --- */
-        .bg-glow {
+        /* --- Engineering Gears Background --- */
+        .bg-gears {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
             z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a0a0a 0%, #0c0a0a 100%);
+        }
+
+        .gear {
+            position: absolute;
+            opacity: 0.05;
+            animation: spin 20s linear infinite;
+            fill: var(--primary);
+        }
+
+        .gear-1 {
+            top: -10%;
+            right: -5%;
+            width: 400px;
+            animation-duration: 40s;
+        }
+
+        .gear-2 {
+            bottom: -5%;
+            left: -5%;
+            width: 300px;
+            animation-direction: reverse;
+        }
+
+        .gear-3 {
+            top: 40%;
+            left: 10%;
+            width: 150px;
+            opacity: 0.03;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* --- Navigation --- */
@@ -55,7 +94,7 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 1100px;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(12, 10, 10, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             padding: 0.8rem 2rem;
@@ -70,10 +109,18 @@
             font-weight: 800;
             font-size: 1.4rem;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .logo span {
             color: var(--primary);
+        }
+
+        .logo svg {
+            width: 24px;
+            fill: var(--primary);
         }
 
         .nav-links a {
@@ -113,7 +160,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, #818cf8, #34d399);
+            background: linear-gradient(90deg, #ef4444, #7f1d1d);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -121,7 +168,7 @@
 
         .hero p {
             font-size: 1.25rem;
-            color: #94a3b8;
+            color: #a1a1aa;
             max-width: 800px;
             margin-bottom: 3rem;
         }
@@ -140,12 +187,13 @@
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 40px var(--maroon-glow);
         }
 
         .btn-primary:hover {
             transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 15px 50px var(--maroon-glow);
+            background: var(--primary-light);
         }
 
         /* --- Interactive Components --- */
@@ -157,10 +205,11 @@
             padding: 3rem;
             width: 100%;
             margin-top: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         .section-tag {
-            color: var(--secondary);
+            color: var(--primary-light);
             font-weight: 800;
             font-size: 0.8rem;
             letter-spacing: 2px;
@@ -184,7 +233,7 @@
         .input-group label {
             display: block;
             margin-bottom: 0.8rem;
-            color: #cbd5e1;
+            color: #a1a1aa;
             font-weight: 600;
         }
 
@@ -192,7 +241,7 @@
         input,
         select {
             width: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--glass-border);
             padding: 1.2rem;
             border-radius: 16px;
@@ -206,12 +255,12 @@
         input:focus {
             border-color: var(--primary);
             outline: none;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .ai-result-panel {
             min-height: 450px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 24px;
             padding: 2rem;
             border: 1px dashed var(--glass-border);
@@ -237,7 +286,7 @@
             align-items: center;
             gap: 0.8rem;
             margin-bottom: 0.8rem;
-            color: #64748b;
+            color: #71717a;
             font-size: 0.9rem;
             opacity: 0.5;
             transition: 0.3s;
@@ -254,16 +303,16 @@
         }
 
         .step.done::before {
-            content: '✓';
-            color: var(--secondary);
-            font-weight: 800;
+            content: '⚙️';
+            margin-right: 5px;
+            animation: spin 2s linear infinite;
         }
 
         .match-score {
             font-size: 5rem;
             font-weight: 800;
-            color: var(--secondary);
-            text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+            color: var(--primary-light);
+            text-shadow: 0 0 30px var(--maroon-glow);
             margin-bottom: 0.5rem;
         }
 
@@ -279,31 +328,44 @@
             padding: 1.5rem;
             border-radius: 16px;
             margin-bottom: 1rem;
-            border-left: 4px solid var(--secondary);
+            border-left: 4px solid var(--primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
             animation: slideUp 0.5s forwards;
         }
 
-        /* --- Document System --- */
-        .doc-form {
-            max-width: 600px;
-            width: 100%;
+        /* --- Partner Grid --- */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
-        .file-upload {
-            border: 2px dashed var(--glass-border);
-            padding: 3rem;
-            text-align: center;
-            border-radius: 24px;
-            cursor: pointer;
+        .partner-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
             transition: 0.3s;
         }
 
-        .file-upload:hover {
+        .partner-card:hover {
             border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
+            background: rgba(185, 28, 28, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .role-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(185, 28, 28, 0.1);
+            color: var(--primary-light);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         /* --- Animations --- */
@@ -329,17 +391,16 @@
             display: none;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* --- Footer --- */
         footer {
             padding: 4rem 2rem;
             text-align: center;
             border-top: 1px solid var(--glass-border);
+            color: #71717a;
+        }
+
+        footer span {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         @media (max-width: 900px) {
@@ -359,99 +420,120 @@
 </head>
 
 <body>
-    <div class="bg-glow"></div>
+    <div class="bg-gears">
+        <!-- SVG Gear Icon (Reuse) -->
+        <svg class="gear gear-1" viewBox="0 0 24 24">
+            <path
+                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.04 4.95 18.95L7.44 17.95C7.96 18.34 8.53 18.66 9.14 18.92L9.52 21.58C9.56 21.82 9.76 22 10 22H14C14.24 22 14.44 21.82 14.48 21.58L14.86 18.92C15.47 18.66 16.04 18.34 16.56 17.95L19.05 18.95C19.27 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" />
+        </svg>
+        <svg class="gear gear-2" viewBox="0 0 24 24">
+            <path
+                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 11.67 4.53 11.34 4.57 11.03L2.46 9.37C2.27 9.22 2.21 8.95 2.34 8.73L4.34 5.27C4.46 5.05 4.73 4.96 4.95 5.05L7.44 6.05C7.96 5.66 8.53 5.34 9.14 5.08L9.52 2.42C9.56 2.18 9.76 2 10 2H14C14.24 2 14.44 2.18 14.48 2.42L14.86 5.08C15.47 5.34 16.04 5.66 16.56 6.05L19.05 5.05C19.27 4.96 19.54 5.05 19.66 5.27L21.66 8.73C21.78 8.95 21.73 9.22 21.54 9.37L19.43 11.03C19.47 11.34 19.5 11.67 19.5 12C19.5 12.33 19.47 12.65 19.43 12.97Z" />
+        </svg>
+        <svg class="gear gear-3" viewBox="0 0 24 24">
+            <path
+                d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.03L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.47 5.34 14.86 5.08L14.48 2.42C14.44 2.18 14.24 2 14 2H10C9.76 2 9.56 2.18 9.52 2.42L9.14 5.08C8.53 5.34 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.03C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.04 4.95 18.95L7.44 17.95C7.96 18.34 8.53 18.66 9.14 18.92L9.52 21.58C9.56 21.82 9.76 22 10 22H14C14.24 22 14.44 21.82 14.48 21.58L14.86 18.92C15.47 18.66 16.04 18.34 16.56 17.95L19.05 18.95C19.27 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" />
+        </svg>
+    </div>
 
     <nav>
-        <div class="logo">Coop<span>Match AI</span></div>
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.47,5.34 14.86,5.08L14.48,2.42C14.44,2.18 14.24,2 14,2H10C9.76,2 9.56,2.18 9.52,2.42L9.14,5.08C8.53,5.34 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11.03C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.53,18.66 9.14,18.92L9.52,21.58C9.56,21.82 9.76,22 10,22H14C14.24,22 14.44,21.82 14.48,21.58L14.86,18.92C15.47,18.66 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+            Coop<span>Match AI</span>
+        </div>
         <div class="nav-links">
-            <a href="#hero">Start</a>
-            <a href="#matcher">AI Matcher</a>
-            <a href="#partners">Partners</a>
-            <a href="#submission">Submit Form</a>
-            <a href="#tech">Technology</a>
+            <a href="#hero">Engineering Hub</a>
+            <a href="#matcher">AI Matrix</a>
+            <a href="#partners">Partner Net</a>
+            <a href="#submission">Docs Portal</a>
         </div>
     </nav>
 
     <!-- HERO -->
     <section id="hero" class="hero">
-        <span class="section-tag">Final Project Presentation</span>
-        <h1>Experience the <span>Next-Gen</span> Co-op Link.</h1>
-        <p>ยกระดับระบบสหกิจศึกษาด้วย AI อัจฉริยะที่ช่วยจับคู่นักศึกษากับบริษัทที่ "ใช่" ที่สุดแบบ Real-time
-            พร้อมระบบจัดการเอกสารไร้กระดาษ</p>
+        <span class="section-tag">Computer Engineering Co-op</span>
+        <h1>Drive Your Future with <span>Engineered</span> Match.</h1>
+        <p>ขับเคลื่อนก้าวแรกสู่วิชาชีพวิศวกรด้วย AI อัจฉริยะ
+            ออกแบบมาเพื่อค้นหาสถานประกอบการที่ตรงกับทักษะวิศวกรรมเฉพาะตัวคุณ</p>
         <div>
-            <a href="#matcher" class="btn btn-primary">Try AI Matching Now</a>
+            <a href="#matcher" class="btn btn-primary">Analyze My Engineering Skills</a>
         </div>
     </section>
 
     <!-- INTERACTIVE MATCHER -->
     <section id="matcher">
         <div class="glass-panel">
-            <span class="section-tag">Interactive AI Feature</span>
+            <span class="section-tag">Vector Match Matrix</span>
             <div style="margin-bottom: 2rem;">
-                <h2 style="font-size: 2.5rem;">Skill-based <span>Auto Match</span></h2>
-                <p style="color: #94a3b8;">ลองใส่ทักษะของคุณ แล้วให้ AI คำนวณหาบริษัทที่เหมาะสมที่สุด</p>
+                <h2 style="font-size: 2.5rem;">CPE <span>Skill Analysis</span></h2>
+                <p style="color: #a1a1aa;">วิเคราะห์ทักษะด้านฮาร์ดแวร์ ซอฟต์แวร์ และเน็ตเวิร์ก เพื่อแมตช์บริษัทที่ใช่
+                </p>
             </div>
 
             <div class="matcher-container">
                 <div class="input-panel">
                     <div class="input-group">
-                        <label>ป้อนความสามารถของคุณ (Skills & Interets)</label>
+                        <label>Engineering Skills (e.g., IoT, Embedded, Cloud, AI)</label>
                         <textarea id="skills-input" rows="5"
-                            placeholder="เช่น React, Node.js, Python, AI, Machine Learning, UI/UX Design..."></textarea>
+                            placeholder="เช่น IoT, Microcontroller, FPGA, React, Python, Cloud Infrastructure..."></textarea>
                     </div>
                     <div class="input-group">
-                        <label>สาขาวิชา</label>
+                        <label>Engineering Discipline</label>
                         <select>
-                            <option>Computer Engineering</option>
-                            <option>Software Engineering</option>
-                            <option>Data Science</option>
-                            <option>IoT & Automation</option>
+                            <option>Computer Engineering (Core)</option>
+                            <option>Network Engineering</option>
+                            <option>Cloud Architecture</option>
+                            <option>Embedded Systems</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary" onclick="runMatch()" style="width: 100%;">START AI ANALYSIS</button>
+                    <button class="btn btn-primary" onclick="runMatch()" style="width: 100%;">START ANALYSIS
+                        ENGINE</button>
                 </div>
 
                 <div class="ai-result-panel" id="result-panel">
                     <div id="default-state">
-                        <div style="font-size: 4rem; opacity: 0.2; margin-bottom: 1rem;">🤖</div>
-                        <p style="color: #64748b;">Ready to analyze your future...</p>
+                        <div style="font-size: 4rem; opacity: 0.2; margin-bottom: 1rem;">⚙️</div>
+                        <p style="color: #71717a;">Engine standby. Input data requested.</p>
                     </div>
 
                     <div class="status-steps" id="ai-steps">
-                        <div class="step" id="step-1">1. Scanning Input Skills</div>
-                        <div class="step" id="step-2">2. Matching with Vector DB</div>
-                        <div class="step" id="step-3">3. Calculating Compatibility</div>
-                        <div class="step" id="step-4">4. Finalizing Candidates</div>
+                        <div class="step" id="step-1">1. Parsing Skills Engine</div>
+                        <div class="step" id="step-2">2. Cross-referencing Partner Matrix</div>
+                        <div class="step" id="step-3">3. Computing Match Vector</div>
+                        <div class="step" id="step-4">4. Validating Requirements</div>
                     </div>
 
                     <div class="loading-pulse" id="loader"></div>
 
                     <div id="match-data" style="display: none; width: 100%;">
                         <div class="match-score" id="score-num">98%</div>
-                        <p style="font-weight: 800; color: var(--secondary); letter-spacing: 2px;">PERFECT MATCH FOUND!
-                        </p>
+                        <p style="font-weight: 800; color: var(--primary-light); letter-spacing: 2px;">ENGINEERING MATCH
+                            FOUND!</p>
 
                         <div class="company-list">
                             <div class="company-item">
                                 <div>
                                     <h4 style="color: #fff;">Agoda (Bangkok Office)</h4>
-                                    <p style="font-size: 0.8rem; color: var(--secondary);">Why matched: High React &
-                                        Node.js affinity</p>
+                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Insight: High Scalability
+                                        affinity</p>
                                 </div>
-                                <span style="font-weight: 800; color: var(--secondary);">98.4%</span>
+                                <span style="font-weight: 800; color: var(--primary-light);">98.4%</span>
                             </div>
                             <div class="company-item" style="animation-delay: 0.2s;">
                                 <div>
                                     <h4 style="color: #fff;">KBTG</h4>
-                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Why matched: Python & AI
-                                        focus match</p>
+                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Insight: Strong Data
+                                        Engineering focus</p>
                                 </div>
                                 <span style="font-weight: 800; color: var(--primary-light);">92.1%</span>
                             </div>
                         </div>
                         <button class="btn"
                             style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--glass-border); margin-top: 1rem; padding: 0.5rem 1.5rem;"
-                            onclick="resetMatch()">Analyze Another</button>
+                            onclick="resetMatch()">Run Another Scan</button>
                     </div>
                 </div>
             </div>
@@ -461,109 +543,43 @@
     <!-- PARTNER ESTABLISHMENTS -->
     <section id="partners">
         <div class="glass-panel">
-            <span class="section-tag">Partner Network</span>
+            <span class="section-tag">Engineering Alliances</span>
             <div style="margin-bottom: 3rem; text-align: center;">
-                <h2 style="font-size: 2.5rem;">Our <span>Partner Establishments</span></h2>
-                <p style="color: #94a3b8;">สำรวจสถานประกอบการชั้นนำในเครือข่ายสหกิจวิศวกรรมคอมพิวเตอร์</p>
+                <h2 style="font-size: 2.5rem;">CPE <span>Partner Network</span></h2>
+                <p style="color: #a1a1aa;">พันธมิตรสถานประกอบการชั้นนำ สำหรับนิสิตวิศวกรรมคอมพิวเตอร์</p>
             </div>
-
-            <style>
-                .partners-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 1.5rem;
-                }
-
-                .partner-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid var(--glass-border);
-                    border-radius: 20px;
-                    padding: 1.5rem;
-                    transition: 0.3s;
-                    cursor: default;
-                }
-
-                .partner-card:hover {
-                    background: rgba(255, 255, 255, 0.07);
-                    border-color: var(--primary);
-                    transform: translateY(-5px);
-                }
-
-                .partner-card h4 {
-                    color: #fff;
-                    margin-bottom: 0.5rem;
-                    font-size: 1.2rem;
-                }
-
-                .partner-card p {
-                    font-size: 0.85rem;
-                    color: #94a3b8;
-                    margin-bottom: 1rem;
-                }
-
-                .role-tag {
-                    display: inline-block;
-                    padding: 0.25rem 0.75rem;
-                    background: rgba(99, 102, 241, 0.1);
-                    color: var(--primary-light);
-                    border-radius: 100px;
-                    font-size: 0.7rem;
-                    font-weight: 600;
-                    margin-right: 0.5rem;
-                    margin-top: 0.5rem;
-                }
-            </style>
 
             <div class="partners-grid">
                 <div class="partner-card">
-                    <h4>Agoda</h4>
-                    <p>ผู้นำด้านแพลตฟอร์มจองที่พักระดับโลก เน้นเทคโนโลยี Scalable Systems</p>
+                    <h4>True Digital Group</h4>
+                    <p>ผู้นำด้าน IoT และ Big Data Ecosystem ในภูมิภาคเอเชียตะวันออกเฉียงใต้</p>
                     <div class="role-tags">
-                        <span class="role-tag">Backend</span>
-                        <span class="role-tag">Frontend</span>
-                        <span class="role-tag">App Dev</span>
-                    </div>
-                </div>
-                <div class="partner-card">
-                    <h4>KBTG</h4>
-                    <p>ศูนย์รวมนวัตกรรมเทคโนโลยีของธนาคารกสิกรไทย เชี่ยวชาญ AI & FinTech</p>
-                    <div class="role-tags">
-                        <span class="role-tag">Data AI</span>
-                        <span class="role-tag">Cybersecurity</span>
-                        <span class="role-tag">Cloud</span>
+                        <span class="role-tag">IoT Systems</span>
+                        <span class="role-tag">Data Analytic</span>
                     </div>
                 </div>
                 <div class="partner-card">
                     <h4>SCB TechX</h4>
-                    <p>บริษัทเทคโนโลยีในกลุ่ม SCB X เน้นการสร้าง Platform และ Digital Solution</p>
+                    <p>บริษัทเทคโนโลยีครบวงจรในกลุ่ม SCB X มุ่งเน้นการปฏิวัติโลกการเงินด้วยเทคโนโลยี</p>
                     <div class="role-tags">
-                        <span class="role-tag">DevOps</span>
-                        <span class="role-tag">Software Architecture</span>
+                        <span class="role-tag">Software Eng</span>
+                        <span class="role-tag">Platform Eng</span>
                     </div>
                 </div>
                 <div class="partner-card">
-                    <h4>Lineman Wongnai</h4>
-                    <p>Platform ยอดนิยมของคนไทย เน้นการจัดการ Big Data และ Real-time Service</p>
+                    <h4>KBTG</h4>
+                    <p>ขุมพลังทางเทคโนโลยีของกสิกรไทย เชี่ยวชาญด้าน Blockchain และ AI ขั้นสูง</p>
                     <div class="role-tags">
-                        <span class="role-tag">Fullstack</span>
-                        <span class="role-tag">UX/UI</span>
-                        <span class="role-tag">QA</span>
-                    </div>
-                </div>
-                <div class="partner-card">
-                    <h4>True Digital Group</h4>
-                    <p>ยักษ์ใหญ่ด้าน Digital Ecosystem ในไทย เชี่ยวชาญด้าน IoT และ Analytics</p>
-                    <div class="role-tags">
-                        <span class="role-tag">IoT Engineer</span>
-                        <span class="role-tag">Big Data</span>
+                        <span class="role-tag">AI / ML</span>
+                        <span class="role-tag">Cloud Architecture</span>
                     </div>
                 </div>
                 <div class="partner-card">
                     <h4>Bitkub</h4>
-                    <p>ผู้นำด้านเทคโนโลยี Blockchain และสินทรัพย์ดิจิทัลในประเทศไทย</p>
+                    <p>ผู้นำด้านสินทรัพย์ดิจิทัลและเทคโนโลยี Blockchain ในประเทศไทย</p>
                     <div class="role-tags">
-                        <span class="role-tag">Blockchain Dev</span>
-                        <span class="role-tag">Crypto Security</span>
+                        <span class="role-tag">Smart Contract</span>
+                        <span class="role-tag">Cybersecurity</span>
                     </div>
                 </div>
             </div>
@@ -572,90 +588,59 @@
 
     <!-- DOCUMENT SUBMISSION -->
     <section id="submission">
-        <div class="glass-panel">
-            <span class="section-tag">Core Workflow</span>
+        <div class="glass-panel" style="max-width: 800px;">
+            <span class="section-tag">Portal Access</span>
             <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 style="font-size: 2.5rem;">Digital <span>Document Submission</span></h2>
-                <p style="color: #94a3b8;">จบปัญหาการส่งเอกสารแบบเดิมๆ ด้วยระบบยื่นคำร้องออนไลน์</p>
+                <h2 style="font-size: 2.5rem;">Engineering <span>Docs Submission</span></h2>
+                <p style="color: #a1a1aa;">ส่งเอกสารประกอบการยื่นคำร้องผ่านระบบออนไลน์ของสาขาวิชา</p>
             </div>
 
-            <div style="display: flex; justify-content: center;">
-                <div class="doc-form">
-                    <div class="input-group">
-                        <label>รหัสนักศึกษา</label>
-                        <input type="text" placeholder="6XXXXXXX-X">
-                    </div>
-                    <div class="input-group">
-                        <label>ประเภทเอกสาร</label>
-                        <select>
-                            <option>ท.01 - คำร้องขอเข้าฝึกงานสหกิจ</option>
-                            <option>ท.02 - หนังสือรับรองจากผู้ปกครอง</option>
-                            <option>ท.03 - Resume/Portfolio</option>
-                        </select>
-                    </div>
-                    <div class="file-upload" onclick="simulateUpload()">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">📁</div>
-                        <p id="upload-status">คลิกเพื่ออัปโหลดไฟล์เอกสาร (PDF)</p>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;"
-                        onclick="submitFinal()">SUBMIT DOCUMENT</button>
-                </div>
+            <div class="input-group">
+                <label>รหัสนิสิต (Student ID)</label>
+                <input type="text" placeholder="6XXXXXXX-X">
             </div>
-        </div>
-    </section>
-
-    <!-- TECH STACK -->
-    <section id="tech" style="min-height: 60vh;">
-        <div style="text-align: center;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 4rem;">System <span>Architecture</span></h2>
-            <div style="display: flex; gap: 4rem; justify-content: center; opacity: 0.7; flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem;">🧠</div>
-                    <p>TensorFlow NLP</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem;">⚡</div>
-                    <p>MQTT Real-time</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem;">🔥</div>
-                    <p>Firebase Auth/Store</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem;">💅</div>
-                    <p>Modern SPA UI</p>
-                </div>
+            <div class="input-group">
+                <label>Document Category</label>
+                <select>
+                    <option>ท.01 - Engineering Co-op Request</option>
+                    <option>ท.02 - Parental Consent Form</option>
+                    <option>ท.03 - Technical Portfolio</option>
+                </select>
             </div>
+            <div style="border: 2px dashed var(--glass-border); padding: 3rem; text-align: center; border-radius: 24px; cursor: pointer; transition: 0.3s;"
+                onclick="simulateUpload()">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📁</div>
+                <p id="upload-status" style="color: #a1a1aa;">Click to attach PDF Portfolio / Documents</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="submitFinal()">SUBMIT TO
+                PORTAL</button>
         </div>
     </section>
 
     <footer>
-        <p>Built with ❤️ by Janis (Chomwarit) | Oracle Janis Project</p>
-        <p>© 2026 CPE Cooperative Education System | Pibulsongkram Rajabhat University</p>
+        <p>Built with ❤️ by <span>Janis (Chomwarit)</span> | Computer Engineering Oracle Janis</p>
+        <p>© 2026 CPE Cooperative Education | PRU University</p>
     </footer>
 
     <script>
         function runMatch() {
             const input = document.getElementById('skills-input').value;
             if (!input) {
-                alert("กรุณาป้อนทักษะของคุณก่อนค่ะ");
+                alert("กรุณาป้อนข้อมูลทักษะวิศวกรรมก่อนค่ะ");
                 return;
             }
 
-            // UI Transitions
             document.getElementById('default-state').style.display = 'none';
             document.getElementById('match-data').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
             document.getElementById('ai-steps').style.display = 'block';
 
-            // Reset steps
             const stepIds = [1, 2, 3, 4];
             stepIds.forEach(s => {
                 const el = document.getElementById(`step-${s}`);
                 el.className = 'step';
             });
 
-            // Sequential AI Simulation
             function updateStep(idx) {
                 if (idx > 4) {
                     finalizeMatch();
@@ -667,7 +652,7 @@
                 setTimeout(() => {
                     current.className = 'step done';
                     updateStep(idx + 1);
-                }, 800 + Math.random() * 1000);
+                }, 800 + Math.random() * 800);
             }
 
             updateStep(1);
@@ -679,8 +664,7 @@
             document.getElementById('match-data').style.display = 'block';
             document.querySelector('.company-list').style.display = 'block';
 
-            // Dynamic scoring
-            const score = 88 + Math.floor(Math.random() * 11);
+            const score = 90 + Math.floor(Math.random() * 9);
             document.getElementById('score-num').innerText = score + "%";
         }
 
@@ -691,16 +675,16 @@
         }
 
         function simulateUpload() {
-            document.getElementById('upload-status').innerText = "📄 doc_resume_janis.pdf (Attached Successfully)";
-            document.getElementById('upload-status').style.color = "var(--secondary)";
+            document.getElementById('upload-status').innerText = "📄 engineer_portfolio_final.pdf (Linked)";
+            document.getElementById('upload-status').style.color = "var(--primary-light)";
         }
 
         function submitFinal() {
             const status = document.getElementById('upload-status').innerText;
-            if (status.includes("Attached")) {
-                alert("ยื่นเอกสารเรียบร้อย! ระบบ AI กำลังส่งข้อมูลไปยังสถานประกอบการที่ท่านเลือก");
+            if (status.includes("Linked")) {
+                alert("ข้อมูลเข้าสู่ระบบของสาขาวิชาเรียบร้อยแล้ว! วิศวกร AI กำลังประมวลผลคำรองของคุณ");
             } else {
-                alert("กรุณาอัปโหลดเอกสารก่อนค่ะ");
+                alert("กรุณาแนบไฟล์เอกสารก่อนค่ะ");
             }
         }
     </script>
