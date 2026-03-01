@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coop-Match AI | Computer Engineering Co-op System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- SPA Style Navigation --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Sections --- */
+        section {
+            min-height: 100vh;
+            padding: 120px 2rem 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        /* --- Grid Features --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 24px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .card .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* --- AI SECTION --- */
+        .ai-section {
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.15), transparent);
+            border-radius: 40px;
+            width: 100%;
+            padding: 5rem;
+            margin-top: 4rem;
+            border: 1px solid var(--border);
+        }
+
+        .ai-header {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .ai-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-header span {
+            color: var(--secondary);
+        }
+
+        .ai-steps {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .step {
+            flex: 1;
+        }
+
+        .step .num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.1);
+            margin-bottom: -1rem;
+            display: block;
+        }
+
+        .step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* --- TECH STACK --- */
+        .tech-list {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0.6;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: #475569;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .ai-steps {
+                flex-direction: column;
+            }
+
+            nav {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Coop<span>Match AI</span></div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#ai">AI Feature</a>
+            <a href="#tech">Tech Stack</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
+        <h1 class="reveal active">The Future of <span>Co-op Education.</span></h1>
+        <p class="reveal active">ระบบจัดการสหกิจศึกษาอัจฉริยะสำหรับวิศวกรรมคอมพิวเตอร์ ยื่นเอกสารง่าย แมตซ์งานด้วย AI
+            อย่างแม่นยำ</p>
+        <div class="reveal active">
+            <a href="#ai" class="btn btn-primary">Discover AI Match</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="ai-header reveal">
+            <h2>Our Core <span>Features.</span></h2>
+            <p>ออกแบบมาเพื่อแก้ปัญหาการหาที่ฝึกงานที่ไม่ตรงสาย และความยุ่งยากของเอกสาร</p>
+        </div>
+        <div class="features-grid">
+            <div class="card reveal">
+                <div class="badge">EASY</div>
+                <h3>E-Document System</h3>
+                <p>ยื่นคำร้องและตรวจสอบสถานะเอกสารสหกิจศึกษาผ่านระบบออนไลน์ 100% ไม่ต้องเดินทางมาคณะ</p>
+            </div>
+            <div class="card reveal">
+                <div class="badge">SMART</div>
+                <h3>AI Resume Analysis</h3>
+                <p>วิเคราะห์ทักษะ (Hard Skills/Soft Skills) จากโปรไฟล์นักศึกษาเพื่อสร้าง Matching Score กับสถานประกอบการ
+                </p>
+            </div>
+            <div class="card reveal">
+                <div class="badge">LIVE</div>
+                <h3>Real-time Tracking</h3>
+                <p>ระบบแจ้งเตือนผลการตอบรับจากบริษัทผ่าน MQTT Protocol แบบทันที (Push Notification)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai">
+        <div class="ai-section reveal">
+            <div class="ai-header">
+                <h2>AI Matching <span>Integration.</span></h2>
+                <p>เบื้องหลังความแม่นยำในการเลือกสถานประกอบการที่เหมาะสมที่สุด</p>
+            </div>
+            <div class="ai-steps">
+                <div class="step">
+                    <span class="num">01</span>
+                    <h4>Data Extraction</h4>
+                    <p>NLP จะดึงข้อมูล Keywords จาก Resume ของนักศึกษาและ Job Description ของบริษัท</p>
+                </div>
+                <div class="step">
+                    <span class="num">02</span>
+                    <h4>Vector Scoring</h4>
+                    <p>ใช้โมเดล Semantic Similarity ในการคำนวณระยะห่างของคุณสมบัติเพื่อหาความเหมาะสม</p>
+                </div>
+                <div class="step">
+                    <span class="num">03</span>
+                    <h4>Matching result</h4>
+                    <p>แสดงรายการบริษัทที่แนะนำ พร้อมระบุเหตุผลว่าทำไมถึงแมตซ์กับนักศึกษาคนนี้</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech">
+        <div class="ai-header reveal" style="text-align: center;">
+            <h2>Powered <span>By.</span></h2>
+        </div>
+        <div class="tech-list reveal">
+            <div class="tech-item">Firebase Cloud</div>
+            <div class="tech-item">TensorFlow.js</div>
+            <div class="tech-item">MQTT Broker</div>
+            <div class="tech-item">Three.js</div>
+            <div class="tech-item">Vite.js</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>สร้างสรรค์โดย Janis (Chomwarit) | Final Project Presentation</p>
+        <p>© 2026 Computer Engineering Cooperative Education System</p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial call
+    </script>
+</body>
+
+</html>
