@@ -650,6 +650,7 @@
             <a href="#hero">Engineering Hub</a>
             <a href="#matcher">AI Matrix</a>
             <a href="#partners">Partner Net</a>
+            <a href="#career-chart">Career Chart</a>
             <a href="#submission">Docs Portal</a>
         </div>
     </nav>
@@ -782,6 +783,226 @@
                     <div class="role-tags">
                         <span class="role-tag">Smart Contract</span>
                         <span class="role-tag">Cybersecurity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAREER PATH CHART -->
+    <section id="career-chart" style="min-height: auto; padding-bottom: 4rem;">
+        <div class="glass-panel">
+            <span class="section-tag">Data Insights</span>
+            <div style="text-align:center; margin-bottom: 2.5rem;">
+                <h2 style="font-size: 2.5rem;">CPE Co-op <span>Career Paths</span></h2>
+                <p style="color:#a1a1aa;">สายงานยอดนิยมของรุ่นพี่ CPE ที่ผ่านระบบสหกิจศึกษา (2021-2025)</p>
+            </div>
+
+            <style>
+                .chart-wrap {
+                    display: flex;
+                    gap: 3rem;
+                    align-items: flex-start;
+                    flex-wrap: wrap;
+                }
+
+                .bar-chart {
+                    flex: 1;
+                    min-width: 300px;
+                }
+
+                .bar-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.2rem;
+                }
+
+                .bar-label {
+                    width: 160px;
+                    font-size: 0.85rem;
+                    color: #a1a1aa;
+                    flex-shrink: 0;
+                    text-align: right;
+                }
+
+                .bar-track {
+                    flex: 1;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 100px;
+                    height: 28px;
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                .bar-fill {
+                    height: 100%;
+                    border-radius: 100px;
+                    width: 0%;
+                    transition: width 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding-right: 10px;
+                }
+
+                .bar-pct {
+                    font-size: 0.8rem;
+                    font-weight: 800;
+                    color: #fff;
+                }
+
+                .donut-wrap {
+                    width: 220px;
+                    flex-shrink: 0;
+                }
+
+                .donut-title {
+                    text-align: center;
+                    font-size: 0.85rem;
+                    color: #a1a1aa;
+                    margin-bottom: 1rem;
+                }
+
+                .donut-svg {
+                    width: 200px;
+                    height: 200px;
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                .donut-legend {
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    font-size: 0.78rem;
+                    color: #a1a1aa;
+                }
+
+                .legend-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    flex-shrink: 0;
+                }
+
+                .chart-subtitle {
+                    font-size: 0.75rem;
+                    color: #71717a;
+                    text-align: center;
+                    margin-top: 2rem;
+                    font-style: italic;
+                }
+            </style>
+
+            <div class="chart-wrap">
+                <!-- Bar Chart -->
+                <div class="bar-chart" id="bar-chart">
+                    <div class="bar-row">
+                        <div class="bar-label">Software / Web Dev</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="82"
+                                style="background: linear-gradient(90deg, #b91c1c, #ef4444);">
+                                <span class="bar-pct">82%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Data Eng / AI</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="68"
+                                style="background: linear-gradient(90deg, #78350f, #f59e0b);">
+                                <span class="bar-pct">68%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Cloud / DevOps</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="55"
+                                style="background: linear-gradient(90deg, #065f46, #10b981);">
+                                <span class="bar-pct">55%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">IoT / Embedded</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="47"
+                                style="background: linear-gradient(90deg, #1e3a5f, #3b82f6);">
+                                <span class="bar-pct">47%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Cybersecurity</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="33"
+                                style="background: linear-gradient(90deg, #4c1d95, #8b5cf6);">
+                                <span class="bar-pct">33%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Blockchain / Web3</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" data-pct="18"
+                                style="background: linear-gradient(90deg, #831843, #ec4899);">
+                                <span class="bar-pct">18%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="chart-subtitle">* Data based on CPE co-op placements 2021–2025 | Multiple selections
+                        allowed</p>
+                </div>
+
+                <!-- Donut Chart -->
+                <div class="donut-wrap">
+                    <div class="donut-title">สัดส่วนตำแหน่งงาน</div>
+                    <svg class="donut-svg" viewBox="0 0 100 100">
+                        <!-- segments: SW 33%, Data 27%, Cloud 22%, IoT 18% -->
+                        <circle cx="50" cy="50" r="36" fill="none" stroke="#b91c1c" stroke-width="18"
+                            stroke-dasharray="75.4 226.2" stroke-dashoffset="0" transform="rotate(-90 50 50)"
+                            class="donut-seg">
+                        </circle>
+                        <circle cx="50" cy="50" r="36" fill="none" stroke="#f59e0b" stroke-width="18"
+                            stroke-dasharray="61.3 226.2" stroke-dashoffset="-75.4" transform="rotate(-90 50 50)"
+                            class="donut-seg">
+                        </circle>
+                        <circle cx="50" cy="50" r="36" fill="none" stroke="#10b981" stroke-width="18"
+                            stroke-dasharray="50.5 226.2" stroke-dashoffset="-136.7" transform="rotate(-90 50 50)"
+                            class="donut-seg">
+                        </circle>
+                        <circle cx="50" cy="50" r="36" fill="none" stroke="#3b82f6" stroke-width="18"
+                            stroke-dasharray="39.1 226.2" stroke-dashoffset="-187.2" transform="rotate(-90 50 50)"
+                            class="donut-seg">
+                        </circle>
+                        <circle cx="50" cy="50" r="25" fill="#0c0a0a"></circle>
+                        <text x="50" y="47" text-anchor="middle" fill="#fff" font-family="Outfit,sans-serif"
+                            font-weight="800" font-size="11">CPE</text>
+                        <text x="50" y="58" text-anchor="middle" fill="#a1a1aa" font-family="Outfit,sans-serif"
+                            font-size="7">Co-op 2025</text>
+                    </svg>
+                    <div class="donut-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#b91c1c;"></div>Software / Web Dev (33%)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#f59e0b;"></div>Data Eng / AI (27%)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#10b981;"></div>Cloud / DevOps (22%)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#3b82f6;"></div>IoT / Embedded (18%)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1084,7 +1305,25 @@
             }
             setTimeout(() => overlay.style.display = 'none', 4000);
         }
+
+        // --- Career Chart Animation (scroll-triggered) ---
+        const barFills = document.querySelectorAll('.bar-fill');
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    barFills.forEach((bar, i) => {
+                        const pct = bar.getAttribute('data-pct');
+                        setTimeout(() => { bar.style.width = pct + '%'; }, i * 120);
+                    });
+                    chartObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.2 });
+        const chartSection = document.getElementById('career-chart');
+        if (chartSection) chartObserver.observe(chartSection);
     </script>
 </body>
+
+</html>
 
 </html>
