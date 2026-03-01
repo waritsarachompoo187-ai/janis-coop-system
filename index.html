@@ -115,6 +115,7 @@
         .hero h1 span {
             background: linear-gradient(90deg, #818cf8, #34d399);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -209,7 +210,7 @@
         }
 
         .ai-result-panel {
-            min-height: 400px;
+            min-height: 450px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 24px;
             padding: 2rem;
@@ -219,13 +220,51 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-steps {
+            text-align: left;
+            width: 100%;
+            max-width: 300px;
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .step.active {
+            opacity: 1;
+            color: var(--primary-light);
+        }
+
+        .step.done {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .step.done::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: 800;
         }
 
         .match-score {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
             color: var(--secondary);
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+            margin-bottom: 0.5rem;
         }
 
         .company-list {
@@ -375,38 +414,44 @@
                 <div class="ai-result-panel" id="result-panel">
                     <div id="default-state">
                         <div style="font-size: 4rem; opacity: 0.2; margin-bottom: 1rem;">🤖</div>
-                        <p style="color: #64748b;">Waiting for input data...</p>
+                        <p style="color: #64748b;">Ready to analyze your future...</p>
+                    </div>
+
+                    <div class="status-steps" id="ai-steps">
+                        <div class="step" id="step-1">1. Scanning Input Skills</div>
+                        <div class="step" id="step-2">2. Matching with Vector DB</div>
+                        <div class="step" id="step-3">3. Calculating Compatibility</div>
+                        <div class="step" id="step-4">4. Finalizing Candidates</div>
                     </div>
 
                     <div class="loading-pulse" id="loader"></div>
 
                     <div id="match-data" style="display: none; width: 100%;">
                         <div class="match-score" id="score-num">98%</div>
-                        <p style="font-weight: 600; color: var(--secondary);">PERFECT MATCH FOUND!</p>
+                        <p style="font-weight: 800; color: var(--secondary); letter-spacing: 2px;">PERFECT MATCH FOUND!
+                        </p>
 
                         <div class="company-list">
                             <div class="company-item">
                                 <div>
                                     <h4 style="color: #fff;">Agoda (Bangkok Office)</h4>
-                                    <p style="font-size: 0.8rem; color: #94a3b8;">Software Engineer Intern</p>
+                                    <p style="font-size: 0.8rem; color: var(--secondary);">Why matched: High React &
+                                        Node.js affinity</p>
                                 </div>
                                 <span style="font-weight: 800; color: var(--secondary);">98.4%</span>
                             </div>
                             <div class="company-item" style="animation-delay: 0.2s;">
                                 <div>
-                                    <h4 style="color: #fff;">Kasikorn Business-Technology Group (KBTG)</h4>
-                                    <p style="font-size: 0.8rem; color: #94a3b8;">Backend / Cloud Developer</p>
+                                    <h4 style="color: #fff;">KBTG</h4>
+                                    <p style="font-size: 0.8rem; color: var(--primary-light);">Why matched: Python & AI
+                                        focus match</p>
                                 </div>
                                 <span style="font-weight: 800; color: var(--primary-light);">92.1%</span>
                             </div>
-                            <div class="company-item" style="animation-delay: 0.4s;">
-                                <div>
-                                    <h4 style="color: #fff;">Lineman Wongnai</h4>
-                                    <p style="font-size: 0.8rem; color: #94a3b8;">Full-stack Developer</p>
-                                </div>
-                                <span style="font-weight: 800; color: #fff;">87.5%</span>
-                            </div>
                         </div>
+                        <button class="btn"
+                            style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--glass-border); margin-top: 1rem; padding: 0.5rem 1.5rem;"
+                            onclick="resetMatch()">Analyze Another</button>
                     </div>
                 </div>
             </div>
@@ -593,7 +638,7 @@
         function runMatch() {
             const input = document.getElementById('skills-input').value;
             if (!input) {
-                alert("กรุณาป้อนทักษะของคุณก่อนครับ");
+                alert("กรุณาป้อนทักษะของคุณก่อนค่ะ");
                 return;
             }
 
@@ -601,30 +646,61 @@
             document.getElementById('default-state').style.display = 'none';
             document.getElementById('match-data').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
+            document.getElementById('ai-steps').style.display = 'block';
 
-            // Simulate AI Processing
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('match-data').style.display = 'block';
-                document.querySelector('.company-list').style.display = 'block';
+            // Reset steps
+            const stepIds = [1, 2, 3, 4];
+            stepIds.forEach(s => {
+                const el = document.getElementById(`step-${s}`);
+                el.className = 'step';
+            });
 
-                // Dynamic scoring (fake logic)
-                const score = 85 + Math.floor(Math.random() * 14);
-                document.getElementById('score-num').innerText = score + "%";
-            }, 2000);
+            // Sequential AI Simulation
+            function updateStep(idx) {
+                if (idx > 4) {
+                    finalizeMatch();
+                    return;
+                }
+                const current = document.getElementById(`step-${idx}`);
+                current.className = 'step active';
+
+                setTimeout(() => {
+                    current.className = 'step done';
+                    updateStep(idx + 1);
+                }, 800 + Math.random() * 1000);
+            }
+
+            updateStep(1);
+        }
+
+        function finalizeMatch() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('ai-steps').style.display = 'none';
+            document.getElementById('match-data').style.display = 'block';
+            document.querySelector('.company-list').style.display = 'block';
+
+            // Dynamic scoring
+            const score = 88 + Math.floor(Math.random() * 11);
+            document.getElementById('score-num').innerText = score + "%";
+        }
+
+        function resetMatch() {
+            document.getElementById('match-data').style.display = 'none';
+            document.getElementById('default-state').style.display = 'block';
+            document.getElementById('skills-input').value = '';
         }
 
         function simulateUpload() {
-            document.getElementById('upload-status').innerText = "📄 document_coop_final.pdf (Uploaded)";
+            document.getElementById('upload-status').innerText = "📄 doc_resume_janis.pdf (Attached Successfully)";
             document.getElementById('upload-status').style.color = "var(--secondary)";
         }
 
         function submitFinal() {
             const status = document.getElementById('upload-status').innerText;
-            if (status.includes("Uploaded")) {
-                alert("ส่งเอกสารเข้าสู่ระบบ AI เรียบร้อยแล้ว! สถานะ: กำลังรอการตรวจสอบ (Pending)");
+            if (status.includes("Attached")) {
+                alert("ยื่นเอกสารเรียบร้อย! ระบบ AI กำลังส่งข้อมูลไปยังสถานประกอบการที่ท่านเลือก");
             } else {
-                alert("กรุณาอัปโหลดเอกสารก่อนครับ");
+                alert("กรุณาอัปโหลดเอกสารก่อนค่ะ");
             }
         }
     </script>
